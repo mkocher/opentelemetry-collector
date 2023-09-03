@@ -5,6 +5,7 @@ package main
 import (
 	"go.opentelemetry.io/collector/connector"
 	forwardconnector "go.opentelemetry.io/collector/connector/forwardconnector"
+	logmetricsconnector "go.opentelemetry.io/collector/connector/logmetricsconnector"
 	"go.opentelemetry.io/collector/exporter"
 	loggingexporter "go.opentelemetry.io/collector/exporter/loggingexporter"
 	otlpexporter "go.opentelemetry.io/collector/exporter/otlpexporter"
@@ -58,6 +59,7 @@ func components() (otelcol.Factories, error) {
 
 	factories.Connectors, err = connector.MakeFactoryMap(
 		forwardconnector.NewFactory(),
+		logmetricsconnector.NewFactory(),
 	)
 	if err != nil {
 		return otelcol.Factories{}, err

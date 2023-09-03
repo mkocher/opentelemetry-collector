@@ -10,6 +10,7 @@ require (
 	go.opentelemetry.io/collector/component v0.81.0
 	go.opentelemetry.io/collector/connector v0.81.0
 	go.opentelemetry.io/collector/connector/forwardconnector v0.81.0
+	go.opentelemetry.io/collector/connector/logmetricsconnector v0.81.0
 	go.opentelemetry.io/collector/exporter v0.81.0
 	go.opentelemetry.io/collector/exporter/loggingexporter v0.81.0
 	go.opentelemetry.io/collector/exporter/otlpexporter v0.81.0
@@ -141,6 +142,8 @@ replace go.opentelemetry.io/collector/consumer => ../../consumer
 replace go.opentelemetry.io/collector/connector => ../../connector
 
 replace go.opentelemetry.io/collector/connector/forwardconnector => ../../connector/forwardconnector
+
+replace go.opentelemetry.io/collector/connector/logmetricsconnector => ../../connector/logmetricsconnector
 
 replace go.opentelemetry.io/collector/exporter => ../../exporter
 

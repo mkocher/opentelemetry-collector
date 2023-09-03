@@ -25,15 +25,18 @@ exporters:
   logging:
     verbosity: detailed
 
+connectors:
+  logmetrics:
+
 service:
   pipelines:
-    traces:
+    logs:
       receivers: [otlp]
-      processors: [memory_limiter, batch]
-      exporters: [logging]
+      processors: [ memory_limiter, batch]
+      exporters: [logmetrics]
     metrics:
-      receivers: [otlp]
-      processors: [memory_limiter, batch]
+      receivers: [logmetrics]
+      processors: [ memory_limiter, batch]
       exporters: [logging]
 
   extensions: [memory_ballast, zpages]

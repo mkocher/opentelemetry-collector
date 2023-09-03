@@ -37,6 +37,7 @@ module-sets:
       - go.opentelemetry.io/collector/processor
       - go.opentelemetry.io/collector/processor/batchprocessor
       - go.opentelemetry.io/collector/processor/memorylimiterprocessor
+      - go.opentelemetry.io/collector/processor/logmetricsprocessor
       - go.opentelemetry.io/collector/receiver
       - go.opentelemetry.io/collector/receiver/otlpreceiver
       - go.opentelemetry.io/collector/semconv
