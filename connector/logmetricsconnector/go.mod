@@ -1,4 +1,4 @@
-module go.opentelemetry.io/collector/connector/forwardconnector
+module go.opentelemetry.io/collector/connector/logmetricsconnector
 
 go 1.19
 

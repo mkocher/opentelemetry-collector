@@ -1,4 +1,4 @@
-module go.opentelemetry.io/collector/exporter/otlpexporter
+module go.opentelemetry.io/collector/exporter/loggregatorexporter
 
 go 1.19
 
