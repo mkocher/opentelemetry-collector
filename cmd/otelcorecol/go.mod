@@ -13,6 +13,7 @@ require (
 	go.opentelemetry.io/collector/connector/logmetricsconnector v0.81.0
 	go.opentelemetry.io/collector/exporter v0.81.0
 	go.opentelemetry.io/collector/exporter/loggingexporter v0.81.0
+	go.opentelemetry.io/collector/exporter/loggregatorexporter v0.81.0
 	go.opentelemetry.io/collector/exporter/otlpexporter v0.81.0
 	go.opentelemetry.io/collector/exporter/otlphttpexporter v0.81.0
 	go.opentelemetry.io/collector/extension v0.81.0
@@ -27,6 +28,9 @@ require (
 )
 
 require (
+	code.cloudfoundry.org/go-diodes v0.0.0-20180905200951-72629b5276e3 // indirect
+	code.cloudfoundry.org/go-loggregator/v9 v9.0.7 // indirect
+	code.cloudfoundry.org/tlsconfig v0.0.0-20200131000646-bbe0f8da39b3 // indirect
 	contrib.go.opencensus.io/exporter/prometheus v0.4.2 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cenkalti/backoff/v4 v4.2.1 // indirect
@@ -148,6 +152,8 @@ replace go.opentelemetry.io/collector/connector/logmetricsconnector => ../../con
 replace go.opentelemetry.io/collector/exporter => ../../exporter
 
 replace go.opentelemetry.io/collector/exporter/loggingexporter => ../../exporter/loggingexporter
+
+replace go.opentelemetry.io/collector/exporter/loggregatorexporter => ../../exporter/loggregatorexporter
 
 replace go.opentelemetry.io/collector/exporter/otlpexporter => ../../exporter/otlpexporter
 

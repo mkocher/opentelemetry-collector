@@ -24,6 +24,11 @@ processors:
 exporters:
   logging:
     verbosity: detailed
+  loggregator:
+    ca_cert: /Users/mkocher/workspace/opentelemetry-collector/exporter/loggregatorexporter/testdata/test_cert.pem
+    cert: /Users/mkocher/workspace/opentelemetry-collector/exporter/loggregatorexporter/testdata/test_cert.pem
+    key: /Users/mkocher/workspace/opentelemetry-collector/exporter/loggregatorexporter/testdata/test_key.pem
+    endpoint: example.com:1234
 
 connectors:
   logmetrics:
@@ -37,6 +42,6 @@ service:
     metrics:
       receivers: [logmetrics]
       processors: [ memory_limiter, batch]
-      exporters: [logging]
+      exporters: [logging, loggregator]
 
   extensions: [memory_ballast, zpages]

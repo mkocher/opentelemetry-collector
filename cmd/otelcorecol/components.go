@@ -8,6 +8,7 @@ import (
 	logmetricsconnector "go.opentelemetry.io/collector/connector/logmetricsconnector"
 	"go.opentelemetry.io/collector/exporter"
 	loggingexporter "go.opentelemetry.io/collector/exporter/loggingexporter"
+	loggregatorexporter "go.opentelemetry.io/collector/exporter/loggregatorexporter"
 	otlpexporter "go.opentelemetry.io/collector/exporter/otlpexporter"
 	otlphttpexporter "go.opentelemetry.io/collector/exporter/otlphttpexporter"
 	"go.opentelemetry.io/collector/extension"
@@ -44,6 +45,7 @@ func components() (otelcol.Factories, error) {
 		loggingexporter.NewFactory(),
 		otlpexporter.NewFactory(),
 		otlphttpexporter.NewFactory(),
+		loggregatorexporter.NewFactory(),
 	)
 	if err != nil {
 		return otelcol.Factories{}, err

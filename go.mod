@@ -44,6 +44,9 @@ require (
 )
 
 require (
+	code.cloudfoundry.org/go-diodes v0.0.0-20180905200951-72629b5276e3 // indirect
+	code.cloudfoundry.org/go-loggregator/v9 v9.0.7 // indirect
+	code.cloudfoundry.org/tlsconfig v0.0.0-20200131000646-bbe0f8da39b3 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
