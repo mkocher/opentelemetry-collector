@@ -21,9 +21,9 @@ func TestSendMetrics(t *testing.T) {
 	// Disable queuing to ensure that we execute the request when calling ConsumeMetrics
 	// otherwise we will not see any errors.
 	cfg.QueueSettings.Enabled = false
-	cfg.CaCert = "/Users/mkocher/workspace/opentelemetry-collector/exporter/loggregatorexporter/testdata/test_cert.pem"
-	cfg.Cert = "/Users/mkocher/workspace/opentelemetry-collector/exporter/loggregatorexporter/testdata/test_cert.pem"
-	cfg.Key = "/Users/mkocher/workspace/opentelemetry-collector/exporter/loggregatorexporter/testdata/test_key.pem"
+	cfg.CaCert = "/home/pivotal/workspace/opentelemetry-collector/exporter/loggregatorexporter/testdata/test_cert.pem"
+	cfg.Cert = "/home/pivotal/workspace/opentelemetry-collector/exporter/loggregatorexporter/testdata/test_cert.pem"
+	cfg.Key = "/home/pivotal/workspace/opentelemetry-collector/exporter/loggregatorexporter/testdata/test_key.pem"
 	cfg.Endpoint = "1.2.3.4:1234"
 
 	set := exportertest.NewNopCreateSettings()
@@ -42,6 +42,11 @@ func TestSendMetrics(t *testing.T) {
 
 	// Send empty metric.
 	md := pmetric.NewMetrics()
+	metric := md.ResourceMetrics().AppendEmpty().ScopeMetrics().AppendEmpty().Metrics().AppendEmpty()
+	metric.SetName("metric-name")
+	metric.SetEmptySum()
+	metric.Sum().SetAggregationTemporality(pmetric.AggregationTemporalityDelta)
+	metric.Sum().DataPoints().AppendEmpty().SetIntValue(42)
 	assert.NoError(t, exp.ConsumeMetrics(context.Background(), md))
 
 }

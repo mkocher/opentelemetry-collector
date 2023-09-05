@@ -74,11 +74,23 @@ func (e *baseExporter) pushMetrics(ctx context.Context, md pmetric.Metrics) erro
 				metric := sm.Metrics().At(k)
 				switch t := metric.Type(); t {
 				case pmetric.MetricTypeGauge:
-					fmt.Println("Sending a gauge to Loggregator")
-					e.client.EmitGauge(loggregator.WithGaugeValue(metric.Name(), float64(metric.Gauge().DataPoints().At(0).IntValue()), metric.Unit()))
+					dp := metric.Gauge().DataPoints().At(0)
+					if dp.ValueType() == pmetric.NumberDataPointValueTypeDouble {
+						fmt.Printf("Sending a gauge to Loggregator: %s => %f", metric.Name(), metric.Gauge().DataPoints().At(0).DoubleValue())
+						e.client.EmitGauge(loggregator.WithGaugeValue(metric.Name(), metric.Gauge().DataPoints().At(0).DoubleValue(), metric.Unit()), loggregator.WithGaugeSourceInfo("OTEL1", "OTEL2"))
+					} else {
+						fmt.Printf("Sending a gauge to Loggregator: %s => %f", metric.Name(), float64(metric.Gauge().DataPoints().At(0).IntValue()))
+						e.client.EmitGauge(loggregator.WithGaugeValue(metric.Name(), float64(metric.Gauge().DataPoints().At(0).IntValue()), metric.Unit()), loggregator.WithGaugeSourceInfo("OTEL1", "OTEL2"))
+					}
 				case pmetric.MetricTypeSum:
-					e.client.EmitCounter(metric.Name(), loggregator.WithDelta(uint64(metric.Sum().DataPoints().At(0).IntValue())))
-					fmt.Println("Sendng a sum to Loggregator")
+					dp := metric.Sum().DataPoints().At(0)
+					if dp.ValueType() == pmetric.NumberDataPointValueTypeDouble {
+						fmt.Printf("Sendng a sum to Loggregator: %s => %d", metric.Name(), uint64(dp.DoubleValue()))
+						e.client.EmitCounter(metric.Name(), loggregator.WithDelta(uint64(dp.DoubleValue())), loggregator.WithCounterSourceInfo("OTEL1", "OTEL2"))
+					} else {
+						fmt.Printf("Sendng a sum to Loggregator: %s => %d", metric.Name(), uint64(dp.IntValue()))
+						e.client.EmitCounter(metric.Name(), loggregator.WithDelta(uint64(dp.IntValue())), loggregator.WithCounterSourceInfo("OTEL1", "OTEL2"))
+					}
 				}
 			}
 		}
